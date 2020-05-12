@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>    
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <title>Todo App</title>
+
+    </head>
+    <body>
+         
+         <div style="margin-top: 80px;" class="container">
+            <h3>Todo Application</h3>
+            <form action="/addURL" method="post">
+                <div class="form-group">
+                    <label for="formGroupExampleInput">Title</label>
+                    <input type="text" class="form-control" name="title" id="formGroupExampleInput" placeholder="Enter a new title">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <hr>
+            </form>
+        </div>
+        {% if todos == [] %}
+            <div class="alert alert-danger" role="alert">
+                    Görüntülenecek herhangi bir kayıt mevcut değildir.
+            </div> 
+        {% else %}
+           <table class="table table-dark">
+            <thead>
+                    <tr>
+                    <th scope="col">id</th>
+                    <th scope="col">Todo Başlık</th>
+                    <th scope="col">Todo Durum</th>
+                    <th scope="col">Durum Güncelle</th>
+                    <th scope="col">Todo Sil</th>
+                    </tr>
+            </thead>
+            <tbody>
+                {% for new_todo  in todos  %}
+                    <tr>
+                        <th scope="row">{{new_todo.id}}</th>
+                        <td>{{new_todo.title}}</td>
+                        {% if new_todo.complete == False %}
+                          <td>Tamamlanmadı</td>
+                        {% else %}
+                          <td>Tamamlandı</td>
+                        {% endif %}
+                        <!-- <td>{{new_todo.complete}}</td>  -->
+                        <td><a href="/complete/{{new_todo.id}}" class="btn btn-danger">Güncelle</a></td>
+                        <td><a href="/delete/{{new_todo.id}}" class="btn btn-dark">Sil</a></td>
+                    </tr>
+                {% endfor %} 
+             </tbody>
+        </table>
+        {% endif %}
+        
+         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+         
+    </body>
+</html>
